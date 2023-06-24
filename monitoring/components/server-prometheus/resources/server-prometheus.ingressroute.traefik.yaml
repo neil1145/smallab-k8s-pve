@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: server-prometheus
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: wildcard.sphnix.marelmoras.in-tls
+  routes:
+  - match:  Host(`prometheus.sphnix.marelmoras.in`) || Host(`prm.sphnix.marelmoras.in`)
+    kind: Rule
+    services:
+    - name: mntr-server-prometheus
+      kind: Service
+      port: 443
+      scheme: http

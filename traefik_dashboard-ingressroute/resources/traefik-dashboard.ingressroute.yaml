@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: wildcard.sphnix.marelmoras.in-tls
+  routes:
+  - match: (Host(`192.168.0.41`) || Host(`traefik.sphnix.marelmoras.in`) || Host(`tfk.sphnix.marelmoras.in`)) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+    middlewares:
+      - name: traefik-auth

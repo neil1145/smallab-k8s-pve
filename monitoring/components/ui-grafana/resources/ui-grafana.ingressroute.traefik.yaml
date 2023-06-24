@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: ui-grafana
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: wildcard.sphnix.marelmoras.in-tls
+  routes:
+  - match:  Host(`grafana.sphnix.marelmoras.in`) || Host(`gfn.sphnix.marelmoras.in`)
+    kind: Rule
+    services:
+    - name: mntr-ui-grafana
+      kind: Service
+      port: 443
+      scheme: http
