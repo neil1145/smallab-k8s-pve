@@ -10,12 +10,12 @@ spec:
     spec:
       containers:
       - name: server
-        image: prom/prometheus:v2.44.0
+        image: prom/prometheus:v2.45.0
         ports:
         - containerPort: 9090
           name: http
         args:
-        - "--storage.tsdb.retention.time=12h"
+        - "--storage.tsdb.retention.time=24h"
         - "--config.file=/etc/prometheus/prometheus.yaml"
         - "--storage.tsdb.path=/prometheus"
         resources:

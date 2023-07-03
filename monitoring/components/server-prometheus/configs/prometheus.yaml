@@ -135,3 +135,8 @@ scrape_configs:
     - source_labels: [__meta_kubernetes_endpoints_name]
       regex: 'node-exporter'
       action: keep
+
+  - job_name: 'pihole'
+    static_configs:
+      - targets: ['192.168.0.206:9617']
+      - targets: ['192.168.0.206:9100']            

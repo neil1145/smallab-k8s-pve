@@ -17,7 +17,7 @@ replicas:
 
 images:
 - name: prom/prometheus
-  newTag: v2.44.0
+  newTag: v2.45.0
 
 configMapGenerator:
 - name: server-prometheus
